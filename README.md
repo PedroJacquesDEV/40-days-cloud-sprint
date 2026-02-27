@@ -20,6 +20,14 @@ Today, I moved beyond foundations to build a structured network, implementing se
 - **Custom Routing Logic:** Created a Public Route Table and established an association with the Public Subnet, defining a default route (0.0.0.0/0) to the Internet Gateway.
 - **State Management:** Successfully executed the Terraform lifecycle, managing resource dependencies (VPC -> IGW -> Route Table).
 
+## Day 3: Security Groups & Stateful Defense
+Today I implemented the first layer of active defense for cloud resources by configuring Security Groups as instance-level firewalls.
+
+### Technical Achievements:
+- **Security Group Provisioning:** Created a virtual firewall for EC2 instances to control inbound and outbound traffic.
+- **Stateful Traffic Logic:** Explored the stateful nature of SGs, ensuring that authorized ingress traffic (Port 22/SSH) is automatically allowed to return without manual egress rules.
+- **Inbound/Outbound Rules:** Configured precise Inbound rules for administrative access and allowed restricted Outbound traffic to enable system updates.
+
 ### Environment: 
 - All tasks performed on **Fedora 43 Workstation**.
 

@@ -57,3 +57,32 @@ resource "aws_route_table_association" "public_associ" {
     subnet_id = aws_subnet.public_subnet.id
     route_table_id = aws_route_table.public_rt.id
 }
+
+# 6. Security Group - The Sand Shield
+resource "aws_security_group" "ssh_access" {
+    name = "allow-ssh"
+    description = "Allow SSH inbound traffic"
+    vpc_id = aws_vpc.main_vpc.id
+
+# Inbound Rules (Ingress)
+ingress {
+    description = "SSH from thhe world"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # EM PRODUÇÃO: Use only real IP (/32)
+}  
+
+#Outbound Rules (Egress)
+egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1" # Permit all protocls for exit
+    cidr_blocks = ["0.0.0.0/0"] 
+}
+
+tags = {
+    Name = "allow-ssh-sg"
+}
+
+}
