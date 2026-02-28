@@ -86,3 +86,19 @@ tags = {
 }
 
 }
+
+# EC2 instance "calling" the resources:
+resource "aws_instance" "cork_server" {
+  ami           = "ami-0c1c30571d2dae5c9" 
+  instance_type = "t3.micro"
+  
+  subnet_id              = aws_subnet.public_subnet.id      # Connecting to Subnet
+  vpc_security_group_ids = [aws_security_group.ssh_access.id] # Using "Sand Shield"
+  
+
+  key_name      = aws_key_pair.deployer.key_name
+
+  tags = {
+    Name = "Shinobi-Server"
+  }
+}
